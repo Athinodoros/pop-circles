@@ -5,30 +5,53 @@ import { Card } from 'react-native-elements';
 import { ListItem } from 'react-native-elements/dist/list/ListItem';
 import * as Device from 'expo-device';
 import * as Constants from 'expo-constants';
+import * as Contacts from 'expo-contacts';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import PopCard from '../components/PopCard';
 import { Text, View } from '../components/Themed';
 import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
-export default class TabOneScreen extends React.Component {
+import voteRoutes from '../providers/vote';
+export default class FeedScreen extends React.Component {
 
   ignore = () => {
-    Alert.alert("Ignored")
+    voteRoutes.ignore()
   }
 
-  upVote = () => {
-    Alert.alert("Up voted")
-
+  upVote = async () => {
+    voteRoutes.upVote();
   }
-
+  
   skip = () => {
-    Alert.alert("skipped for now")
+    voteRoutes.skip()
+    
+  }
+  
+  downVote = () => {
+    voteRoutes.downVote()
+    
+  }
+  
+  requestPermitions = async () => {
+    let res = await Contacts.getPermissionsAsync().then(perm => {
+      if (res) {
+        console.log("Permitions already granted");
 
+        return res;
+      }
+    })
+    let resNew = Contacts.requestPermissionsAsync()
+    return resNew;
   }
 
-  downVote = () => {
-    Alert.alert("Down voted")
+  getUniqueId = () => {
+    let uniqueId = "";
+    uniqueId += Device.modelName;
+    uniqueId += Device.brand;
+    uniqueId += Device.deviceName;
 
+      return uniqueId;
+  
   }
 
 
@@ -36,7 +59,7 @@ export default class TabOneScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <PopCard upVote={this.upVote} downVote={this.downVote} skip={this.skip} ignore={this.ignore} title={"test passed title"} content={""} />
+        <PopCard upVote={this.upVote} downVote={this.downVote} skip={this.skip} ignore={this.ignore} title={"test passed title"} content={this.getUniqueId()} />
       </View>
     );
   }
@@ -54,6 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   separator: {
+
     marginEnd: 8,
     height: 1,
     width: '80%',
