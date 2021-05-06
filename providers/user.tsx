@@ -8,7 +8,7 @@ var requestOptions = {
     method: 'POST',
     headers: myHeaders,
 };
-let createUser = (userID:string|number[]) => {
+let createUser = (userID:string) => {
 
     var raw = JSON.stringify({ "_id": userID });
     requestOptions['body'] = raw;

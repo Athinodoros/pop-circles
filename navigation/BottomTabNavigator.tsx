@@ -11,8 +11,8 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import FeedScreen from '../screens/FeedScreen';
-import TabThreeScreen from '../screens/SettingsScreen';
-import TabTwoScreen from '../screens/WriteScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import PostScreen from '../screens/PostScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -22,7 +22,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Write"
+      initialRouteName="Post"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Feed"
@@ -32,7 +32,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Write"
+        name="Post"
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="pencil-outline" color={color} />,
@@ -52,7 +52,7 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={24} style={{ marginBottom: -2 }} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -65,7 +65,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={FeedScreen}
-        options={{ headerTitle: 'Opinions' }}
+        options={{ headerShown:false }}
       />
     </TabOneStack.Navigator>
   );
@@ -78,8 +78,8 @@ function TabTwoNavigator() {
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Compose Opinion' }}
+        component={PostScreen}
+        options={{headerShown:false }}
       />
     </TabTwoStack.Navigator>
   );
@@ -93,8 +93,8 @@ function TabThreeNavigator() {
     <TabThreeStack.Navigator>
       <TabThreeStack.Screen
         name="TabThreeScreen"
-        component={TabThreeScreen}
-        options={{ headerTitle: 'Settings' }}
+        component={SettingsScreen}
+        options={{headerShown:false }}
       />
     </TabThreeStack.Navigator>
   );

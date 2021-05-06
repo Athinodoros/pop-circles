@@ -10,7 +10,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Feed: undefined;
-  Write: undefined;
+  Post: undefined;
   Settings: undefined;
 };
 

@@ -1,19 +1,34 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import Navigation from '../navigation';
 
-export default function TabThreeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>This is the settings page</Text>
-      <View style={styles.separator} lightColor="#eee"  />
-      <View>
-        <Text>Test</Text>
+
+export default class SettingsScreen extends React.Component {
+   setEmailToCurrentUser = (email: string)=>{
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+    if (email.match(validRegex)) {
+      //TODO: save email to current User 
+
+    }
+  }
+
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>This is the settings page</Text>
+        <View style={styles.separator} lightColor="#eee"  />
+        <View>
+          <TextInput onChange={(change)=>{
+            this.setEmailToCurrentUser(change.nativeEvent.text)
+          }}></TextInput>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({

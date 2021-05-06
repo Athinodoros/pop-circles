@@ -15,7 +15,7 @@ export default function App() {
 
   getValueFor(USER_ID).then((value) => {
     if (!value) {
-      let newPhoneID ="12kn12kn12kn";
+      let newPhoneID = uuid.v4();
       createUser(newPhoneID);
       save(USER_ID, newPhoneID)
     }
